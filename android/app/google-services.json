@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "MESSAGING_SENDER_ID",
+    "project_id": "PROJECT_ID",
+    "storage_bucket": "PROJECT_ID.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "ANDROID_APP_ID",
+        "android_client_info": {
+          "package_name": "com.example.store_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "ANDROID_API_KEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
