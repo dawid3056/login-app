@@ -8,6 +8,7 @@ import 'package:store_app/components/button.dart';
 import 'package:store_app/components/password_text_field.dart';
 import 'package:store_app/components/square_tile.dart';
 import 'package:store_app/components/text_field.dart';
+import 'package:store_app/pages/forgot_pw_page.dart';
 import 'package:store_app/pages/home_page.dart';
 import 'package:store_app/pages/register_page.dart';
 
@@ -164,7 +165,13 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => ForgotPasswordPage(),
+                              ),
+                            );
+                          },
                           child: Text(
                             "Forgot Password?",
                             style: TextStyle(color: Colors.grey.shade700),
