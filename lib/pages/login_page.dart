@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:store_app/components/button.dart';
 import 'package:store_app/components/password_text_field.dart';
 import 'package:store_app/components/square_tile.dart';
@@ -52,6 +53,31 @@ class _LoginPageState extends State<LoginPage> {
           return Future.error(e);
         }
       }
+    }
+  }
+
+  Future<void> signInWithGoogle() async {
+    try {
+      GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+      AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      await FirebaseAuth.instance.signInWithCredential(credential);
+
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      );
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: e.toString(),
+      );
     }
   }
 
@@ -181,8 +207,11 @@ class _LoginPageState extends State<LoginPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SquareTail(
-                        imagePath: 'assets/images/google_image.png',
+                      GestureDetector(
+                        onTap: signInWithGoogle,
+                        child: SquareTail(
+                          imagePath: 'assets/images/google_image.png',
+                        ),
                       ),
                       SizedBox(
                         width: 40,
