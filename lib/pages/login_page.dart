@@ -11,7 +11,7 @@ import 'package:store_app/pages/home_page.dart';
 import 'package:store_app/pages/register_page.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({
+  const LoginPage({
     super.key,
   });
 
