@@ -4,17 +4,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:store_app/components/button.dart';
+import 'package:store_app/components/password_text_field.dart';
 import 'package:store_app/components/square_tile.dart';
 import 'package:store_app/components/text_field.dart';
 import 'package:store_app/pages/home_page.dart';
 import 'package:store_app/pages/register_page.dart';
 
 class LoginPage extends StatefulWidget {
-  //final Function() onTap;
-
-  const LoginPage({
+  LoginPage({
     super.key,
-    //required this.onTap,
   });
 
   @override
@@ -25,6 +23,8 @@ class _LoginPageState extends State<LoginPage> {
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  bool _obsecureText = true;
 
   void signIn(String email, String password) async {
     if (_formKey.currentState!.validate()) {
@@ -100,12 +100,22 @@ class _LoginPageState extends State<LoginPage> {
                       return null;
                     },
                   ),
-                  MyTextField(
+                  PasswordTextField(
                     action: TextInputAction.done,
                     controller: passwordTextController,
                     hintText: "Password",
                     icon: Icon(Icons.key),
-                    obscureText: true,
+                    obscureText: _obsecureText,
+                    iconButton: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _obsecureText = !_obsecureText;
+                        });
+                      },
+                      icon: _obsecureText
+                          ? Icon(Icons.visibility)
+                          : Icon(Icons.visibility_off),
+                    ),
                     onSaved: (value) {
                       passwordTextController.text = value!;
                       return null;

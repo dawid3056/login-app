@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 
-class MyTextField extends StatelessWidget {
+class PasswordTextField extends StatelessWidget {
   final TextEditingController controller;
   String hintText;
   Icon icon;
+  IconButton iconButton;
   final bool obscureText;
   TextInputAction action;
   final String? Function(String?) validator;
   final String? Function(String?) onSaved;
 
-  MyTextField(
+  PasswordTextField(
       {super.key,
       required this.controller,
       required this.hintText,
       required this.icon,
+      required this.iconButton,
       required this.obscureText,
       required this.action,
       required this.validator,
@@ -42,6 +44,7 @@ class MyTextField extends StatelessWidget {
             ),
           ),
           prefixIcon: icon,
+          suffixIcon: iconButton,
           hintText: hintText,
           filled: true,
           fillColor: Colors.grey.shade200,
