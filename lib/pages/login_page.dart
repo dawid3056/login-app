@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +11,7 @@ import 'package:store_app/components/text_field.dart';
 import 'package:store_app/pages/forgot_pw_page.dart';
 import 'package:store_app/pages/home_page.dart';
 import 'package:store_app/pages/register_page.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({
@@ -56,6 +57,7 @@ class _LoginPageState extends State<LoginPage> {
       }
     }
   }
+
 
   Future<void> signInWithGoogle() async {
     try {
@@ -174,7 +176,9 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           child: Text(
                             "Forgot Password?",
-                            style: TextStyle(color: Colors.grey.shade700),
+                            style: TextStyle(
+                              color: Colors.blue,
+                            ),
                           ),
                         ),
                       ],
@@ -251,6 +255,7 @@ class _LoginPageState extends State<LoginPage> {
                             "Register now",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
+                              color: Colors.blue,
                             ),
                           ),
                         ),

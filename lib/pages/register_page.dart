@@ -180,6 +180,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             "Login now",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
+                              color: Colors.blue,
                             ),
                           ),
                         )
