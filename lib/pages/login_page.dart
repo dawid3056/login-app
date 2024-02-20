@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously, empty_catches
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:store_app/components/button.dart';
@@ -11,7 +12,6 @@ import 'package:store_app/components/text_field.dart';
 import 'package:store_app/pages/forgot_pw_page.dart';
 import 'package:store_app/pages/home_page.dart';
 import 'package:store_app/pages/register_page.dart';
-
 
 class LoginPage extends StatefulWidget {
   const LoginPage({
@@ -58,7 +58,6 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-
   Future<void> signInWithGoogle() async {
     try {
       GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -73,6 +72,26 @@ class _LoginPageState extends State<LoginPage> {
       await FirebaseAuth.instance.signInWithCredential(credential);
 
       Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      );
+    } catch (e) {
+      print(e.toString());
+      Fluttertoast.showToast(
+        msg: e.toString(),
+      );
+    }
+  }
+
+  Future<void> signInWithFacebook() async {
+    try {
+      final LoginResult loginResult = await FacebookAuth.instance.login();
+      final OAuthCredential fbAuthCredential =
+          FacebookAuthProvider.credential(loginResult.accessToken!.token);
+      await FirebaseAuth.instance.signInWithCredential(fbAuthCredential);
+      Navigator.pushReplacement(
+        context,
         MaterialPageRoute(
           builder: (context) => HomePage(),
         ),
@@ -227,8 +246,11 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         width: 40,
                       ),
-                      SquareTail(
-                        imagePath: 'assets/images/fb_image.png',
+                      GestureDetector(
+                        onTap: signInWithFacebook,
+                        child: SquareTail(
+                          imagePath: 'assets/images/fb_image.png',
+                        ),
                       )
                     ],
                   ),
