@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:store_app/components/button.dart';
 import 'package:store_app/pages/home_page.dart';
-import 'package:store_app/pages/login_page.dart';
 
 class VerifyEmailPage extends StatefulWidget {
   const VerifyEmailPage({super.key});
@@ -15,6 +15,7 @@ class VerifyEmailPage extends StatefulWidget {
 
 class _VerifyEmailPageState extends State<VerifyEmailPage> {
   bool isEmailVerified = false;
+  bool canResendEmail = false;
   Timer? timer;
 
   @override
@@ -27,20 +28,20 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
       sendVerificationEmail();
 
       Timer.periodic(
-        Duration(seconds: 3),
+        const Duration(seconds: 3),
         (_) => checkEmailVerified(),
       );
     }
   }
 
   Future checkEmailVerified() async {
-
-    await FirebaseAuth.instance.currentUser!.reload();
-    setState(() {
-      isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
-    });
-
-    if(isEmailVerified) timer?.cancel();
+    await FirebaseAuth.instance.currentUser?.reload();
+    if (mounted) {
+      setState(() {
+        isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
+      });
+    }
+    if (isEmailVerified) timer?.cancel();
   }
 
   @override
@@ -53,6 +54,18 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
     try {
       final user = FirebaseAuth.instance.currentUser!;
       await user.sendEmailVerification();
+
+      setState(
+        () => canResendEmail = false,
+      );
+      await Future.delayed(
+        const Duration(
+          seconds: 5,
+        ),
+      );
+      setState(
+        () => canResendEmail = true,
+      );
     } catch (e) {
       Fluttertoast.showToast(
         msg: e.toString(),
@@ -65,17 +78,42 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
       ? HomePage()
       : Scaffold(
           appBar: AppBar(
+            titleTextStyle: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
             backgroundColor: Colors.black87,
+            centerTitle: true,
+            title: const Text("Verify Email"),
           ),
           body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              FloatingActionButton(onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const LoginPage(),
+              const Text(
+                "A verification email has been sent to your email",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              MyButton(
+                onTap: () => sendVerificationEmail(),
+                text: "Resend email",
+              ),
+              GestureDetector(
+                onTap: () => FirebaseAuth.instance.signOut(),
+                child: const Text(
+                  "Cancel",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
                   ),
-                );
-              }),
+                ),
+              ),
             ],
           ),
         );

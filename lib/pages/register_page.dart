@@ -6,7 +6,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:store_app/components/button.dart';
 import 'package:store_app/components/password_text_field.dart';
 import 'package:store_app/components/text_field.dart';
-import 'package:store_app/pages/home_page.dart';
 import 'package:store_app/pages/login_page.dart';
 import 'package:store_app/pages/verify_email_page.dart';
 
@@ -26,6 +25,15 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _obsecureText1 = true;
   bool _obsecureText2 = true;
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    emailTextController.dispose();
+    passwordTextController.dispose();
+    confirmPasswordTextController.dispose();
+    _formKey.currentState?.dispose();
+    super.dispose();
+  }
 
   void createUser(String email, String password) async {
     if (_formKey.currentState!.validate()) {

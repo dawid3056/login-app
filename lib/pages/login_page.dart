@@ -29,6 +29,14 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _obsecureText = true;
 
+  @override
+  void dispose() {
+    emailTextController.dispose();
+    passwordTextController.dispose();
+    _formKey.currentState?.dispose();
+    super.dispose();
+  }
+
   void signIn(String email, String password) async {
     if (_formKey.currentState!.validate()) {
       try {
@@ -77,7 +85,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
     } catch (e) {
-      //print(e.toString());
       Fluttertoast.showToast(
         msg: e.toString(),
       );
