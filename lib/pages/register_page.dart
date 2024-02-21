@@ -8,6 +8,7 @@ import 'package:store_app/components/password_text_field.dart';
 import 'package:store_app/components/text_field.dart';
 import 'package:store_app/pages/home_page.dart';
 import 'package:store_app/pages/login_page.dart';
+import 'package:store_app/pages/verify_email_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({
@@ -39,7 +40,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Fluttertoast.showToast(msg: "Registration Successful"),
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (context) => HomePage(),
+                    builder: (context) => VerifyEmailPage(),
                   ),
                 ),
               },
