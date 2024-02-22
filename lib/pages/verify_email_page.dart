@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:store_app/components/button.dart';
 import 'package:store_app/pages/home_page.dart';
+import 'package:store_app/pages/login_page.dart';
 
 class VerifyEmailPage extends StatefulWidget {
   const VerifyEmailPage({super.key});
@@ -27,7 +28,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
     if (!isEmailVerified) {
       sendVerificationEmail();
 
-      Timer.periodic(
+      timer = Timer.periodic(
         const Duration(seconds: 3),
         (_) => checkEmailVerified(),
       );
@@ -35,12 +36,10 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
   }
 
   Future checkEmailVerified() async {
-    await FirebaseAuth.instance.currentUser?.reload();
-    if (mounted) {
+    await FirebaseAuth.instance.currentUser!.reload();
       setState(() {
         isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
       });
-    }
     if (isEmailVerified) timer?.cancel();
   }
 
@@ -73,6 +72,12 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
     }
   }
 
+  void onTap() {
+    if(canResendEmail) {
+      sendVerificationEmail();
+    }
+  }
+
   @override
   Widget build(BuildContext context) => isEmailVerified
       ? HomePage()
@@ -100,11 +105,19 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                 ),
               ),
               MyButton(
-                onTap: () => sendVerificationEmail(),
+                onTap: onTap,
                 text: "Resend email",
               ),
               GestureDetector(
-                onTap: () => FirebaseAuth.instance.signOut(),
+                onTap: () => {
+                  FirebaseAuth.instance.signOut(),
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(),
+                    ),
+                  ),
+                },
                 child: const Text(
                   "Cancel",
                   style: TextStyle(
