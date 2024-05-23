@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -43,38 +44,38 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'WEB_API_KEY',
-    appId: 'WEB_APP_ID',
-    messagingSenderId: 'MESSAGING_SENDER_ID',
-    projectId: 'PROJECT_ID',
-    authDomain: 'PROJECT_ID.firebaseapp.com',
-    storageBucket: 'PROJECT_ID.appspot.com',
+  static final FirebaseOptions web = FirebaseOptions(
+    apiKey: dotenv.env['WEB_API_KEY']!,
+    appId: dotenv.env['WEB_APP_ID']!,
+    messagingSenderId: dotenv.env['MESSAGING_SENDER_ID']!,
+    projectId: dotenv.env['PROJECT_ID']!,
+    authDomain: '${dotenv.env['PROJECT_ID']!}.firebaseapp.com',
+    storageBucket: '${dotenv.env['PROJECT_ID']!}.appspot.com',
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'ANDROID_API_KEY',
-    appId: 'ANDROID_APP_ID',
-    messagingSenderId: 'MESSAGING_SENDER_ID',
-    projectId: 'PROJECT_ID',
-    storageBucket: 'PROJECT_ID.appspot.com',
+  static final FirebaseOptions android = FirebaseOptions(
+    apiKey: dotenv.env['ANDROID_API_KEY']!,
+    appId: dotenv.env['ANDROID_APP_ID']!,
+    messagingSenderId: dotenv.env['MESSAGING_SENDER_ID']!,
+    projectId: dotenv.env['PROJECT_ID']!,
+    storageBucket: '${dotenv.env['PROJECT_ID']!}.appspot.com',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'IOS_API_KEY',
-    appId: 'IOS_APP_ID',
-    messagingSenderId: 'MESSAGING_SENDER_ID',
-    projectId: 'PROJECT_ID',
-    storageBucket: 'PROJECT_ID.appspot.com',
-    iosBundleId: 'com.example.PROJECT_NAME',
+  static final FirebaseOptions ios = FirebaseOptions(
+    apiKey: dotenv.env['IOS_API_KEY']!,
+    appId: dotenv.env['IOS_APP_ID']!,
+    messagingSenderId: dotenv.env['MESSAGING_SENDER_ID']!,
+    projectId: dotenv.env['PROJECT_ID']!,
+    storageBucket: '${dotenv.env['PROJECT_ID']!}.appspot.com',
+    iosBundleId: dotenv.env['PROJECT_NAME']!,
   );
 
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'IOS_API_KEY',
-    appId: 'MACOS_APP_ID',
-    messagingSenderId: 'MESSAGING_SENDER_ID',
-    projectId: 'PROJECT_ID',
-    storageBucket: 'PROJECT_ID.appspot.com',
-    iosBundleId: 'com.example.PROJECT_NAME.RunnerTests',
+  static final FirebaseOptions macos = FirebaseOptions(
+    apiKey: dotenv.env['IOS_API_KEY']!,
+    appId: dotenv.env['MACOS_APP_ID']!,
+    messagingSenderId: dotenv.env['MESSAGING_SENDER_ID']!,
+    projectId: dotenv.env['PROJECT_ID']!,
+    storageBucket: '${dotenv.env['PROJECT_ID']!}.appspot.com',
+    iosBundleId: dotenv.env['PROJECT_NAME']!,
   );
 }

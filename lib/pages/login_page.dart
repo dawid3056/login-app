@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously, empty_catches
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -122,22 +120,22 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 60, 10, 10),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(10, 60, 10, 10),
                     child: Icon(
                       Icons.lock,
                       size: 100,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 30, 10, 10),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
                     child: Text("Welcome back!"),
                   ),
                   MyTextField(
                     action: TextInputAction.next,
                     controller: emailTextController,
                     hintText: "Email",
-                    icon: Icon(Icons.email),
+                    icon: const Icon(Icons.email),
                     obscureText: false,
                     onSaved: (value) {
                       emailTextController.text = value!;
@@ -159,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                     action: TextInputAction.done,
                     controller: passwordTextController,
                     hintText: "Password",
-                    icon: Icon(Icons.key),
+                    icon: const Icon(Icons.key),
                     obscureText: _obsecureText,
                     iconButton: IconButton(
                       onPressed: () {
@@ -168,8 +166,8 @@ class _LoginPageState extends State<LoginPage> {
                         });
                       },
                       icon: _obsecureText
-                          ? Icon(Icons.visibility)
-                          : Icon(Icons.visibility_off),
+                          ? const Icon(Icons.visibility)
+                          : const Icon(Icons.visibility_off),
                     ),
                     onSaved: (value) {
                       passwordTextController.text = value!;
@@ -196,11 +194,11 @@ class _LoginPageState extends State<LoginPage> {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => ForgotPasswordPage(),
+                                builder: (context) => const ForgotPasswordPage(),
                               ),
                             );
                           },
-                          child: Text(
+                          child: const Text(
                             "Forgot Password?",
                             style: TextStyle(
                               color: Colors.blue,
@@ -217,7 +215,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     text: "Sign In",
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   Row(
@@ -240,28 +238,28 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
                         onTap: signInWithGoogle,
-                        child: SquareTail(
+                        child: const SquareTail(
                           imagePath: 'assets/images/google_image.png',
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 40,
                       ),
                       GestureDetector(
                         onTap: signInWithFacebook,
-                        child: SquareTail(
+                        child: const SquareTail(
                           imagePath: 'assets/images/fb_image.png',
                         ),
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   Padding(
@@ -278,9 +276,9 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => RegisterPage()));
+                                    builder: (context) => const RegisterPage()));
                           },
-                          child: Text(
+                          child: const Text(
                             "Register now",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,

@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -32,7 +30,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         showDialog(
           context: context,
           builder: (context) {
-            return AlertDialog(
+            return const AlertDialog(
               content: Text("Password reset link sent! Check your email"),
             );
           },
@@ -53,18 +51,18 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black87,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Center(
         child: Form(
           key: _formKey,
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(30, 30, 30, 10),
                 child: Text(
                   "Enter your password and we will send you a password reset link:",
                   style: TextStyle(
@@ -78,7 +76,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 action: TextInputAction.next,
                 controller: emailTextController,
                 hintText: "Email",
-                icon: Icon(Icons.email),
+                icon: const Icon(Icons.email),
                 obscureText: false,
                 onSaved: (value) {
                   emailTextController.text = value!;

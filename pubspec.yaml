@@ -41,6 +41,7 @@ dependencies:
   google_sign_in: ^6.2.1
   cloud_firestore: ^4.15.5
   flutter_facebook_auth: ^6.1.1
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +69,7 @@ flutter:
   assets:
     - assets/images/google_image.png
     - assets/images/fb_image.png
+    - .env
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

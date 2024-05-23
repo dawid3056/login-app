@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -48,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Fluttertoast.showToast(msg: "Registration Successful"),
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (context) => VerifyEmailPage(),
+                    builder: (context) => const VerifyEmailPage(),
                   ),
                 ),
               },
@@ -77,22 +75,22 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
+                  const Padding(
+                    padding: EdgeInsets.all(15.0),
                     child: Icon(
                       Icons.lock,
                       size: 100,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 30, 10, 10),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
                     child: Text("Let's create an account!"),
                   ),
                   MyTextField(
                     action: TextInputAction.next,
                     controller: emailTextController,
                     hintText: "Enter your email",
-                    icon: Icon(Icons.email),
+                    icon: const Icon(Icons.email),
                     obscureText: false,
                     onSaved: (value) {
                       emailTextController.text = value!;
@@ -109,7 +107,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     action: TextInputAction.next,
                     controller: passwordTextController,
                     hintText: "Enter your password",
-                    icon: Icon(Icons.key),
+                    icon: const Icon(Icons.key),
                     obscureText: _obsecureText1,
                     iconButton: IconButton(
                       onPressed: () {
@@ -118,8 +116,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         });
                       },
                       icon: _obsecureText1
-                          ? Icon(Icons.visibility)
-                          : Icon(Icons.visibility_off),
+                          ? const Icon(Icons.visibility)
+                          : const Icon(Icons.visibility_off),
                     ),
                     onSaved: (value) {
                       passwordTextController.text = value!;
@@ -141,7 +139,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     action: TextInputAction.done,
                     controller: confirmPasswordTextController,
                     hintText: "Confirm your password",
-                    icon: Icon(Icons.key),
+                    icon: const Icon(Icons.key),
                     obscureText: _obsecureText2,
                     iconButton: IconButton(
                       onPressed: () {
@@ -150,8 +148,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         });
                       },
                       icon: _obsecureText2
-                          ? Icon(Icons.visibility)
-                          : Icon(Icons.visibility_off),
+                          ? const Icon(Icons.visibility)
+                          : const Icon(Icons.visibility_off),
                     ),
                     onSaved: (value) {
                       confirmPasswordTextController.text = value!;
@@ -183,9 +181,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginPage()));
+                                    builder: (context) => const LoginPage()));
                           },
-                          child: Text(
+                          child: const Text(
                             "Login now",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
